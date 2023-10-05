@@ -13,10 +13,14 @@ public class EnemyBehavior : MonoBehaviour
     Boundry _horizontalBoundry;
 
     Material _enemyMaterial;
+
+    GameObject _bulletPrefab;
+    int _count = 0;
     // Start is called before the first frame update
     void Start()
     {
        _enemyMaterial = GetComponent<SpriteRenderer>().material;
+        _bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
 
         ResetEnemy();
     }
@@ -36,6 +40,7 @@ public class EnemyBehavior : MonoBehaviour
 
         }
     }
+
 
     void ResetEnemy()
     {

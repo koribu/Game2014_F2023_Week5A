@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerBehavour : MonoBehaviour
@@ -22,6 +23,8 @@ public class PlayerBehavour : MonoBehaviour
     GameObject _bulletPrefab;
     int _count = 0;
 
+    BulletManager _bulletManager;
+
         // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +34,8 @@ public class PlayerBehavour : MonoBehaviour
                         Application.platform == RuntimePlatform.IPhonePlayer;
 
         _gameManager = FindAnyObjectByType<GameManager>();
+        _bulletManager = FindAnyObjectByType<BulletManager>();
+
         _bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
     }
 
@@ -50,10 +55,12 @@ public class PlayerBehavour : MonoBehaviour
     private void FixedUpdate()
     {
         _count++;
-        if (_count > 20)
+        if (_count > 5)
         {
-            GameObject bullet = Instantiate<GameObject>(_bulletPrefab);
+            GameObject bullet = _bulletManager.GetBullet();
+            bullet.SetActive(true);
             bullet.transform.position = transform.position;
+            bullet.GetComponent<BulletBehavior>().SetDirection(Vector3.up);
             _count = 0;
         }
     }
