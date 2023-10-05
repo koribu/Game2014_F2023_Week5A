@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c96a8edb7637e418437a64f13df642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletTotal: 5
+  _bulletTotal: 150
 --- !u!4 &420455783
 Transform:
   m_ObjectHideFlags: 0

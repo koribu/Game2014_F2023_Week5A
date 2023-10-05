@@ -21,7 +21,7 @@ public class BulletBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(_direction * Time.deltaTime * _speed);
+        transform.position += _direction * Time.deltaTime * _speed;
 
         if(transform.position.y > _offLimit.max || transform.position.y < _offLimit.min)
         {
