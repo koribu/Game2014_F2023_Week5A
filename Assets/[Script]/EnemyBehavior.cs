@@ -15,12 +15,18 @@ public class EnemyBehavior : MonoBehaviour
     Material _enemyMaterial;
 
     GameObject _bulletPrefab;
+
+    BulletManager _bulletManager;
+
+    [SerializeField]
+    Transform _bulletPoint;
     int _count = 0;
     // Start is called before the first frame update
     void Start()
     {
        _enemyMaterial = GetComponent<SpriteRenderer>().material;
         _bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
+        _bulletManager = FindAnyObjectByType<BulletManager>();
 
         ResetEnemy();
     }
@@ -38,6 +44,14 @@ public class EnemyBehavior : MonoBehaviour
             ResetEnemy();
 
 
+        }
+
+        _count++;
+        if (_count > 5)
+        {
+            _bulletManager.GetBullet(_bulletPoint.position, Vector3.down,Color.red);
+            
+            _count = 0;
         }
     }
 

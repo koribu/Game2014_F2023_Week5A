@@ -23,7 +23,7 @@ public class BulletBehavior : MonoBehaviour
     {
         transform.Translate(_direction * Time.deltaTime * _speed);
 
-        if(transform.position.y > _offLimit.max || transform.position.x < _offLimit.min)
+        if(transform.position.y > _offLimit.max || transform.position.y < _offLimit.min)
         {
             _manager.ReturnBullet(gameObject);
         }

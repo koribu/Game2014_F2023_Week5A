@@ -42,16 +42,27 @@ public class BulletManager : MonoBehaviour
 
     }
     
-    public GameObject GetBullet()
+    public GameObject GetBullet(Vector3 spawnPos, Vector3 dir, Color color)
     {
         if( _bulletPool.Count < 1 )
             CreateBullet();
-        return _bulletPool.Dequeue();
+
+        GameObject bullet = _bulletPool.Dequeue();
+
+        bullet.SetActive(true);
+        bullet.transform.position = spawnPos;
+        bullet.GetComponent<BulletBehavior>().SetDirection(dir);
+        bullet.GetComponent<SpriteRenderer>().color = color;
+
+
+        return bullet;
     }
 
     public void ReturnBullet(GameObject bullet)
     {
         bullet.SetActive(false);
+
+
 
         _bulletPool.Enqueue(bullet);
     }

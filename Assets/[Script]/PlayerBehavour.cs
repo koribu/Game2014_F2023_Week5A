@@ -25,7 +25,10 @@ public class PlayerBehavour : MonoBehaviour
 
     BulletManager _bulletManager;
 
-        // Start is called before the first frame update
+    [SerializeField]
+    Transform _bulletPoint;
+
+    // Start is called before the first frame update
     void Start()
     {
         _camera = Camera.main;
@@ -57,10 +60,8 @@ public class PlayerBehavour : MonoBehaviour
         _count++;
         if (_count > 5)
         {
-            GameObject bullet = _bulletManager.GetBullet();
-            bullet.SetActive(true);
-            bullet.transform.position = transform.position;
-            bullet.GetComponent<BulletBehavior>().SetDirection(Vector3.up);
+            _bulletManager.GetBullet(_bulletPoint.position, Vector3.up,Color.blue);
+
             _count = 0;
         }
     }
