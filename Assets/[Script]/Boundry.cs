@@ -7,6 +7,6 @@ using UnityEngine;
 [Serializable]
 public struct Boundry 
 {
-    public float xPoint;
-    public float yPoint;
+    public float min;
+    public float max;
 }

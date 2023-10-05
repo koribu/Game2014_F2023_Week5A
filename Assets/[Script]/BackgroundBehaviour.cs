@@ -23,10 +23,10 @@ public class BackgroundBehaviour : MonoBehaviour
     {
         transform.position = new Vector3(transform.position.x, transform.position.y - _speed * Time.deltaTime, transform.position.z);
 
-        if(transform.position.y < _boundry.yPoint)
+        if(transform.position.y < _boundry.min)
         {
             //transform.position = _spawnPosition;
-            transform.position = new Vector3(transform.position.x, _boundry.xPoint, transform.position.z);
+            transform.position = new Vector3(transform.position.x, _boundry.max, transform.position.z);
 
         }
     }

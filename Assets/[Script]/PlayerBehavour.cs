@@ -19,6 +19,9 @@ public class PlayerBehavour : MonoBehaviour
 
     GameManager _gameManager;
 
+    GameObject _bulletPrefab;
+    int _count = 0;
+
         // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +31,7 @@ public class PlayerBehavour : MonoBehaviour
                         Application.platform == RuntimePlatform.IPhonePlayer;
 
         _gameManager = FindAnyObjectByType<GameManager>();
+        _bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
     }
 
     // Update is called once per frame
@@ -37,10 +41,21 @@ public class PlayerBehavour : MonoBehaviour
             GetTouchInput();
         else
             GetConventionalInput();
-     
+        
 
         Move();
 
+    }
+
+    private void FixedUpdate()
+    {
+        _count++;
+        if (_count > 20)
+        {
+            GameObject bullet = Instantiate<GameObject>(_bulletPrefab);
+            bullet.transform.position = transform.position;
+            _count = 0;
+        }
     }
 
     void GetTouchInput()
@@ -71,14 +86,14 @@ public class PlayerBehavour : MonoBehaviour
         transform.position = _destination;
 
 
-        if (transform.position.x < _boundry.xPoint)
+        if (transform.position.x < _boundry.min)
         {
-            transform.position = new Vector3(_boundry.xPoint, transform.position.y, transform.position.z);
+            transform.position = new Vector3(_boundry.min, transform.position.y, transform.position.z);
         }
 
-        if (transform.position.x > _boundry.yPoint)
+        if (transform.position.x > _boundry.max)
         {
-            transform.position = new Vector3(_boundry.yPoint, transform.position.y, transform.position.z);
+            transform.position = new Vector3(_boundry.max, transform.position.y, transform.position.z);
         }
     }
 

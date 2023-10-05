@@ -24,12 +24,12 @@ public class EnemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3 (Mathf.PingPong(Time.time * _speedHorizontal, _horizontalBoundry.yPoint - _horizontalBoundry.xPoint)  
-            + _horizontalBoundry.xPoint , transform.position.y - _speedVertical * Time.deltaTime, 0);
+        transform.position = new Vector3 (Mathf.PingPong(Time.time * _speedHorizontal, _horizontalBoundry.max - _horizontalBoundry.min)  
+            + _horizontalBoundry.min , transform.position.y - _speedVertical * Time.deltaTime, 0);
 
 
 
-        if(_verticalBoundry.yPoint > transform.position.y)
+        if(_verticalBoundry.min > transform.position.y)
         {
             ResetEnemy();
 
@@ -46,6 +46,6 @@ public class EnemyBehavior : MonoBehaviour
 
         GetComponent<SpriteRenderer>().color = _enemyMaterial.color;
 
-        transform.position = new Vector3(Random.Range(_horizontalBoundry.xPoint, _horizontalBoundry.yPoint), _verticalBoundry.xPoint, transform.position.z);
+        transform.position = new Vector3(Random.Range(_horizontalBoundry.min, _horizontalBoundry.max), _verticalBoundry.max, transform.position.z);
     }
 }
